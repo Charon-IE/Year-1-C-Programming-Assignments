@@ -29,6 +29,7 @@
   <ItemGroup>
     <Text Include="..\..\..\..\OneDrive - National University of Ireland, Galway\Desktop\article-irish-times.txt" />
     <Text Include="..\..\..\..\OneDrive - National University of Ireland, Galway\Desktop\dictionary.txt" />
+    <Text Include="Notes.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
