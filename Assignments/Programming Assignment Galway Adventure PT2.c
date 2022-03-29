@@ -161,9 +161,14 @@ int main() {
 
 
             if (displayObject == 1) {
-                printf("Objects here: ");
+                printf("Objects here:");
                 for (int i = 0; i < 2; i++) {
                     if (objects[i].objectlocation == playerLocationNum) {
+                        if (objects[i].objectlocation == playerLocationNum && objects[i+1].objectlocation == playerLocationNum) {
+                            printf("%s, %s\n", objects[i].name, objects[i+1].name);
+                            break;
+                        }
+                        else
                         printf("%s\n", objects[i].name);
                     }
                 }
@@ -233,7 +238,7 @@ int main() {
                 if (ExamineReq != -1) {
                     printf("%s\n", objects[ExamineReq].description);
                 }
-                else if (Items[0] != 0 && Items[1] != 0) {
+                else if (Items[0] == 1 || Items[1] == 1) {
                     for (int i = 0; i < 2; i++) {
                         if (strcmp(OBJ, objects[i].name) == 0) {
                             if (Items[i] == 1) {
