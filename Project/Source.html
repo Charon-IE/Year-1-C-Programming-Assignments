@@ -1,0 +1,23 @@
+<!DOCpTYPE html>
+<html>
+ <head>
+     <title>
+     HTML Exercise 7/10/21
+     </title>
+       <script>
+           var num1 = 5 + 7 * 6
+           function handleclick() {
+               var p = document.getElementById('myParagraph');
+           p.innerHTML = num1;
+           }
+       </script>
+ </head>
+  <body>
+      <p id='myParagraph'>
+          Calculation: 5+7*6
+          Result will be displayed here.
+      </p>
+  
+      <button onclick='handleclick();'> Click for result!</button>
+  </body>
+</html>
