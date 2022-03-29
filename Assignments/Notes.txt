@@ -2,3 +2,5 @@ Scanf can't be used of reading strings with spaces
 Fgets, with the stdin file pointers works fine
 Scanf with  %[^\n]s **Note the space before the %
 ***Also include a space after the printf prompt
+
+Changed displayobj to int = Need 3 possibilites, -1 for examine,drop,pick, where display object is no longer needed for that iteration of the loop
