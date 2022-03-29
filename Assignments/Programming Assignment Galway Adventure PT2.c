@@ -17,11 +17,12 @@ typedef struct {
 typedef enum {
     ERROR,
     N, S, E, W, IN, OUT,
-    LOOK, HELP,TAKE, DROP, EXAMINE,INVENTORY,QUIT,
+    LOOK, HELP, TAKE, DROP,
+    EXAMINE, INVENTORY, QUIT,
     END
 } command;
 
-char commands[][20] = { "error","n","s","e","w","in","out","look","help","quit", "take", "drop", "examine", "inventory"};
+char commands[][20] = { "error","n","s","e","w","in","out","look","help","take", "drop", "examine", "inventory", "end"};
 
 location locations[40];
 object objects[5];
@@ -188,7 +189,6 @@ int main() {
 
             case LOOK:
                 displayLocation = true;
-                displayObject = true;
                 break;
 
             case HELP:
@@ -201,8 +201,17 @@ int main() {
                 printf(".\n\n");
                 break;
 
-            case INVENTORY:
-
+            case EXAMINE:
+                displayObject = isObject(currLoc.out);
+                if (displayObject) {
+                    for (int i = 0; i < 2; i++) {
+                        if (objects[i].objectlocation == playerLocationNum) {
+                            printf("%s\n", objects[i].description);
+                        }
+                    }
+                }
+                else
+                    printf("\nNo objects to examine!\n");
                 break;
 
             case QUIT:
