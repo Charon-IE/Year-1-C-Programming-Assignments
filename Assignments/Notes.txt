@@ -1,0 +1,4 @@
+Scanf can't be used of reading strings with spaces
+Fgets, with the stdin file pointers works fine
+Scanf with  %[^\n]s **Note the space before the %
+***Also include a space after the printf prompt
