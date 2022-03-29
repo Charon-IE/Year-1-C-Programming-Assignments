@@ -129,7 +129,7 @@ int main() {
         char txt[200] = "";
         command cmd = ERROR;
         bool displayLocation = true;
-        bool displayObject = true;
+        bool displayObject = false;
 
         while (cmd != QUIT) {
             location currLoc = locations[playerLocationNum];
@@ -140,10 +140,12 @@ int main() {
             }
 
             if (displayObject) {
+                printf("\nObjects here:");
                for (int i = 0; i<2; i++){
                    if (objects[i].objectlocation == playerLocationNum) {
-                       printf("\nObjects here:%s\n", objects[i].name);
+                       printf(" %s ", objects[i].name);
                    }
+                   printf("\n");
                }
                 displayObject = false;
             }
