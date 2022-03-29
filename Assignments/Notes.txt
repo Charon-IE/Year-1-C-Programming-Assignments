@@ -16,3 +16,7 @@ Upon taking an item, increment the element respective to the item and set that o
 
 
 When examining items, if there are no items to examine in the area, examine the against items you are carrying, stringcompare to check exactly what item and then see if you have that item.
+
+Inventory command, check carry array to see if youre carrying anything and inform the user. insert a comma at the second iteration and if something was printed in the previous location
+
+Drop command, 

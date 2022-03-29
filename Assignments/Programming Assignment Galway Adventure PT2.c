@@ -22,7 +22,7 @@ typedef enum {
     END
 } command;
 
-char commands[][20] = { "error","n","s","e","w","in","out","look","help","take", "drop", "examine", "inventory", "end"};
+char commands[][20] = { "error","n","s","e","w","in","out","look","help","take", "drop", "examine", "inventory", "quit"};
 
 location locations[40];
 object objects[5];
@@ -110,7 +110,7 @@ bool tryMoveTo(int locationNum) {
         return true;
     }
 
-    printf("\nYou can't go that way.\n\n");
+    printf("You can't go that way.\n");
     return false;
 }
 
@@ -156,6 +156,9 @@ int main() {
                 printf("\n%s\n", currLoc.description);
                 displayLocation = false; // (for next iteration)
             }
+            else
+                displayObject = -1;
+
 
             if (displayObject == 1) {
                 printf("Objects here: ");
@@ -210,6 +213,7 @@ int main() {
 
             case LOOK:
                 displayLocation = true;
+                displayObject = isObject(playerLocationNum);
                 break;
 
             case HELP:
@@ -256,12 +260,50 @@ int main() {
                 displayObject = -1;
                 break;
 
+            case DROP:
+                if (Items[0] == 1 || Items[1] == 1) {
+                    printf("Drop what?> ");
+                    scanf_s(" %[^\n]s", OBJ, 20);
+                    for (int i = 0; i < 2; i++) {
+                        if (strcmp(OBJ, objects[i].name) == 0 && Items[i] == 1) {
+                            Items[i] = 0;
+                            objects[i].objectlocation = playerLocationNum;
+                            printf("Successfully dropped %s.\n", objects[i].name);
+                        }
+                    }
+                }
+                else {
+                    printf("You are not carrying anything!\n");
+                }
+                displayObject = -1;
+                break;
+
+            case INVENTORY:
+                if (Items[0] == 1 || Items[1] == 1) {
+                    printf("You are carrying: ");
+                    for (int i = 0; i < 2; i++) {
+                        if (Items[i] == 1) {
+                            if (i == 1 && Items[0] == 1) {
+                                printf(", ");
+                            }
+                            printf("%s", objects[i].name);
+                        }
+                    }
+                    printf("\n");
+                }
+                else {
+                    printf("You are not carrying anything!\n");
+                }
+                displayObject = -1;
+                break;
+
             case QUIT:
                 printf("Bye!\n");
                 break;
 
             default:
                 printf("Huh?\n");
+                displayObject = -1;
             }
         }
     }
