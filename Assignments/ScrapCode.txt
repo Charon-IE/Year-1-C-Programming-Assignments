@@ -1,0 +1,10 @@
+if (Items[0] != 0 || Items[1] != 0) {
+                    for (int i = 0; i < 2; i++) {
+                        if (Items[i] == 1) {
+                            printf("%s", objects[i].name);
+                        }
+                    }
+                }
+                if (Items[0] == 0 && Items[1] == 0 && ExamineReq == -1) {
+                    printf("\nNothing to examine!");
+                }

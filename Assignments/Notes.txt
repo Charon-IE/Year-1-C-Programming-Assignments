@@ -4,3 +4,15 @@ Scanf with  %[^\n]s **Note the space before the %
 ***Also include a space after the printf prompt
 
 Changed displayobj to int = Need 3 possibilites, -1 for examine,drop,pick, where display object is no longer needed for that iteration of the loop
+
+Item Management:
+Two variable array, element 0 and element 1 represent item 1 and item 2 respectively. Intially both 0, when player has the specific item (carrying it), it is changed to 1
+
+Item Element 0 = USB Drive
+Item Element 1 = Ice Cream
+
+Upon taking an item, increment the element respective to the item and set that objects location to 0
+0 will represent that its on the person
+
+
+When examining items, if there are no items to examine in the area, examine the against items you are carrying, stringcompare to check exactly what item and then see if you have that item.

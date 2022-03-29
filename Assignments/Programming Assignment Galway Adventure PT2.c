@@ -32,6 +32,7 @@ char locationsFile[] = "C:\\Users\\burli\\OneDrive - National University of Irel
 char objectsFile[] = "C:\\Users\\burli\\OneDrive - National University of Ireland, Galway\\Desktop\\adventure_objects.txt";
 char OBJ[20] = "";
 int playerLocationNum = 1;
+int Items[2] = {0,0};
 
 FILE* openFileForReading(char* filename) {
     FILE* file_ptr;
@@ -131,6 +132,12 @@ int ExamineObject(char* OBJ) {
     return -1;
 }
 
+void itemManagement(int i) {
+    Items[i] = 1;
+    objects[i].objectlocation = 0;
+    printf("%s was taken successfully!\n", objects[i].name);
+}
+
 int main() {
     if (readLocations()&&readObjects()) {
         printf("Welcome to Galway Adventure. Type 'help' for help.\n");
@@ -219,11 +226,33 @@ int main() {
                 printf("Examine what?> ");
                 scanf_s(" %[^\n]s", OBJ, 20);
                 ExamineReq = ExamineObject(OBJ);
-                if (ExamineReq == -1) {
-                    printf("\nNothing to Examine!");
+                if (ExamineReq != -1) {
+                    printf("%s\n", objects[ExamineReq].description);
+                }
+                else if (Items[0] != 0 && Items[1] != 0) {
+                    for (int i = 0; i < 2; i++) {
+                        if (strcmp(OBJ, objects[i].name) == 0) {
+                            if (Items[i] == 1) {
+                                printf("%s\n", objects[i].description);
+                            }
+                        }
+                    }
                 }
                 else
-                    printf("%s\n", objects[ExamineReq].description);
+                    printf("Theres nothing to examine\n");
+
+                displayObject = -1;
+                break;
+
+            case TAKE:
+                printf("Take what?> ");
+                scanf_s(" %[^\n]s", OBJ, 20);
+                ExamineReq = ExamineObject(OBJ);
+                if (ExamineReq == -1) {
+                    printf("You can't pick that up here!\n");
+                }
+                else
+                itemManagement(ExamineReq);
                 displayObject = -1;
                 break;
 

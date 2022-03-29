@@ -27,9 +27,12 @@
     <ClCompile Include="Programming Lecture 24.2.22.c" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\..\..\..\OneDrive - National University of Ireland, Galway\Desktop\adventure_locations.txt" />
+    <Text Include="..\..\..\..\OneDrive - National University of Ireland, Galway\Desktop\adventure_objects.txt" />
     <Text Include="..\..\..\..\OneDrive - National University of Ireland, Galway\Desktop\article-irish-times.txt" />
     <Text Include="..\..\..\..\OneDrive - National University of Ireland, Galway\Desktop\dictionary.txt" />
     <Text Include="Notes.txt" />
+    <Text Include="ScrapCode.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
