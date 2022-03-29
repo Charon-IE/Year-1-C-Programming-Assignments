@@ -61,6 +61,7 @@ bool readLocations() {
             if (l.description[len - 2] == '\r')
                 l.description[len - 2] = '\0'; // aslo remove \r from the string
             locations[numLocations] = l; // the 1st location is 1 (not 0) so we can use 0 to mean 'nothing' in adventure_locations.txt
+
         }
     }
 
@@ -72,7 +73,7 @@ bool readObjects() {
     if (file_ptr == NULL)
         return false;
 
-    numObjects = 0;
+    numObjects = -1;
     int readHeaderLines = 0;
     char line[200];
     while (fgets(line, 99, file_ptr) != NULL) {
@@ -86,6 +87,7 @@ bool readObjects() {
             o.description[len - 1] = '\0'; // remove \n from the string
             if (o.description[len - 2] == '\r')
                 o.description[len - 2] = '\0'; // aslo remove \r from the string
+            objects[numObjects] = o;
         }
     }
 
@@ -140,7 +142,7 @@ int main() {
             if (displayObject) {
                for (int i = 0; i<2; i++){
                    if (objects[i].objectlocation == playerLocationNum) {
-                       printf("\nObjects here:%s\n", objects[i].description);
+                       printf("\nObjects here:%s\n", objects[i].name);
                    }
                }
                 displayObject = false;
