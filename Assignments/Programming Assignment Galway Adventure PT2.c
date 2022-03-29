@@ -30,7 +30,7 @@ int numLocations = 0;
 int numObjects = 0;
 char locationsFile[] = "C:\\Users\\burli\\OneDrive - National University of Ireland, Galway\\Desktop\\adventure_locations.txt";
 char objectsFile[] = "C:\\Users\\burli\\OneDrive - National University of Ireland, Galway\\Desktop\\adventure_objects.txt";
-
+char OBJ[20] = "";
 int playerLocationNum = 1;
 
 FILE* openFileForReading(char* filename) {
@@ -113,13 +113,22 @@ bool tryMoveTo(int locationNum) {
     return false;
 }
 
-bool isObject(int locationNum) {
+int isObject(int locationNum) {
     for (int i = 0; i < 2; i++) {
         if (objects[i].objectlocation == locationNum) {
-            return true;
+            return 1;
         }
     }
-    return false;
+    return 0;
+}
+
+int ExamineObject(char* OBJ) {
+    for (int i = 0; i < 2; i++) {
+        if (strcmp(OBJ, objects[i].name) == 0 && playerLocationNum == objects[i].objectlocation) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 int main() {
@@ -130,7 +139,8 @@ int main() {
         char txt[200] = "";
         command cmd = ERROR;
         bool displayLocation = true;
-        bool displayObject = false;
+        int displayObject = 0;
+        int ExamineReq;
 
         while (cmd != QUIT) {
             location currLoc = locations[playerLocationNum];
@@ -140,16 +150,20 @@ int main() {
                 displayLocation = false; // (for next iteration)
             }
 
-            if (displayObject) {
-                printf("\nObjects here:");
-               for (int i = 0; i<2; i++){
-                   if (objects[i].objectlocation == playerLocationNum) {
-                       printf(" %s ", objects[i].name);
-                   }
-                   printf("\n");
-               }
-                displayObject = false;
+            if (displayObject == 1) {
+                printf("Objects here: ");
+                for (int i = 0; i < 2; i++) {
+                    if (objects[i].objectlocation == playerLocationNum) {
+                        printf("%s\n", objects[i].name);
+                    }
+                }
+                displayObject = 0;
             }
+
+            else if (displayObject == 0) {
+                printf("Objects here: Nothing\n");
+            }
+
 
             // read and interpret user input
             printf("> ");
@@ -202,16 +216,15 @@ int main() {
                 break;
 
             case EXAMINE:
-                displayObject = isObject(currLoc.out);
-                if (displayObject) {
-                    for (int i = 0; i < 2; i++) {
-                        if (objects[i].objectlocation == playerLocationNum) {
-                            printf("%s\n", objects[i].description);
-                        }
-                    }
+                printf("Examine what?> ");
+                scanf_s(" %[^\n]s", OBJ, 20);
+                ExamineReq = ExamineObject(OBJ);
+                if (ExamineReq == -1) {
+                    printf("\nNothing to Examine!");
                 }
                 else
-                    printf("\nNo objects to examine!\n");
+                    printf("%s\n", objects[ExamineReq].description);
+                displayObject = -1;
                 break;
 
             case QUIT:

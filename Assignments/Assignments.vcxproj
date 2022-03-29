@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Downloads\Assignment22_TimonasSamoska_21326923_Submission\Assignment22_TimonasSamoska_21326923_Submission\Programming Assignment Week 22.c" />
     <ClCompile Include="..\..\..\..\OneDrive - National University of Ireland, Galway\Assignments\Assignment16_TimonasSamoska_21326923_Submission\Assignment16_TimonasSamoska_21326923_Submission\Assignment Week16.c" />
-    <ClCompile Include="..\..\..\..\OneDrive - National University of Ireland, Galway\Assignments\Assignment17_TimonasSamoska_21326923_Submission\Assignment Week 17.c" />
     <ClCompile Include="Assignment Week 20 Guessing Game.c" />
     <ClCompile Include="Flesch Readability Index Assignment.c" />
     <ClCompile Include="Programming Assignment Galway Adventure PT2.c" />

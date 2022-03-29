@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\OneDrive - National University of Ireland, Galway\Assignments\Assignment17_TimonasSamoska_21326923_Submission\Assignment Week 17.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\OneDrive - National University of Ireland, Galway\Assignments\Assignment16_TimonasSamoska_21326923_Submission\Assignment16_TimonasSamoska_21326923_Submission\Assignment Week16.c">
       <Filter>Source Files</Filter>
     </ClCompile>
