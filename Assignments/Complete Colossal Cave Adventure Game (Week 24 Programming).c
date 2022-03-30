@@ -139,7 +139,7 @@ int isObject(int locationNum) {
 
 int ExamineRequest(char* OBJ) {
     for (int i = 0; i < 2; i++) {
-        if (strcmp(OBJ, objects[i].name) == 0 && playerLocationNum == objects[i].objectlocation) {
+        if (strcmp(OBJ, TempName[i]) == 0 && playerLocationNum == objects[i].objectlocation) {
             return i;
         }
     }
@@ -257,7 +257,7 @@ int main() {
                 }
                 else if (Items[0] == 1 || Items[1] == 1) {
                     for (int i = 0; i < 2; i++) {
-                        if (strcmp(OBJ, objects[i].name) == 0) {
+                        if (strcmp(OBJ, TempName[i]) == 0) {
                             if (Items[i] == 1) {
                                 printf("%s\n", objects[i].description);
                             }
@@ -289,7 +289,7 @@ int main() {
                     scanf_s(" %[^\n]s", OBJ, 20);
                     LowerCaseConverter(OBJ);
                     for (int i = 0; i < 2; i++) {
-                        if (strcmp(OBJ, objects[i].name) == 0 && Items[i] == 1) {
+                        if (strcmp(OBJ, TempName[i]) == 0 && Items[i] == 1) {
                             Items[i] = 0;
                             objects[i].objectlocation = playerLocationNum;
                             printf("Successfully dropped %s.\n", objects[i].name);
