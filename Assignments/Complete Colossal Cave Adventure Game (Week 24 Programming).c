@@ -138,7 +138,6 @@ bool readObjects() {
             //I.E (with the capitals in the right place). When asked for an object, the program will be able to understand the object if the input is full capitals or all lowercase when comparing.
             //The temp array perserves the original name (w/capitals) of the object which is printed throughout the program.
             LowerCaseConverter(TempLowerName[numObjects]);
-            o.description[len - 1] = '\0'; // remove \n from the string
             if (o.description[len - 2] == '\r')
                 o.description[len - 2] = '\0'; // aslo remove \r from the string
             //Pass o into the array of objects
