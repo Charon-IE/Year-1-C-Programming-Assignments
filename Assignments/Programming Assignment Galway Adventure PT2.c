@@ -33,6 +33,7 @@ char objectsFile[] = "C:\\Users\\burli\\OneDrive - National University of Irelan
 char OBJ[20] = "";
 int playerLocationNum = 1;
 int Items[2] = {0,0};
+char TempName[5][10];
 
 FILE* openFileForReading(char* filename) {
     FILE* file_ptr;
@@ -40,6 +41,16 @@ FILE* openFileForReading(char* filename) {
     if (file_ptr == NULL)
         printf("Could not open %s\n", filename);
     return file_ptr;
+}
+
+void LowerCaseConverter(char String[]) {
+    int i = 0;
+    //Loop until string terminator is met
+    while (String[i] != '\0') {
+        //Convert each element to lowecase
+        String[i] = tolower(String[i]);
+        i++;
+    }
 }
 
 bool readLocations() {
@@ -82,10 +93,13 @@ bool readObjects() {
         if (readHeaderLines < 2)
             readHeaderLines++;
         else {
+            
             numObjects++;
             object o;
             sscanf_s(line, "%[^\t]\t%d\t%[^\t]\n", o.name, 100, &o.objectlocation, o.description, 100);
             int len = (int)strlen(o.description);
+            strcpy_s(TempName[numObjects], 10, o.name);
+            LowerCaseConverter(TempName[numObjects]);
             o.description[len - 1] = '\0'; // remove \n from the string
             if (o.description[len - 2] == '\r')
                 o.description[len - 2] = '\0'; // aslo remove \r from the string
@@ -123,7 +137,7 @@ int isObject(int locationNum) {
     return 0;
 }
 
-int ExamineObject(char* OBJ) {
+int ExamineRequest(char* OBJ) {
     for (int i = 0; i < 2; i++) {
         if (strcmp(OBJ, objects[i].name) == 0 && playerLocationNum == objects[i].objectlocation) {
             return i;
@@ -132,22 +146,23 @@ int ExamineObject(char* OBJ) {
     return -1;
 }
 
-void itemManagement(int i) {
+void TakeItem(int i) {
     Items[i] = 1;
     objects[i].objectlocation = 0;
     printf("%s was taken successfully!\n", objects[i].name);
 }
+
 
 int main() {
     if (readLocations()&&readObjects()) {
         printf("Welcome to Galway Adventure. Type 'help' for help.\n");
 
         // game loop (one iteration per command from the player)
-        char txt[200] = "";
         command cmd = ERROR;
         bool displayLocation = true;
         int displayObject = 0;
         int ExamineReq;
+        char txt[200] = "";
 
         while (cmd != QUIT) {
             location currLoc = locations[playerLocationNum];
@@ -161,7 +176,7 @@ int main() {
 
 
             if (displayObject == 1) {
-                printf("Objects here:");
+                printf("Objects here: ");
                 for (int i = 0; i < 2; i++) {
                     if (objects[i].objectlocation == playerLocationNum) {
                         if (objects[i].objectlocation == playerLocationNum && objects[i+1].objectlocation == playerLocationNum) {
@@ -183,6 +198,7 @@ int main() {
             // read and interpret user input
             printf("> ");
             scanf_s("%s", txt, 10);
+            LowerCaseConverter(txt);
             cmd = identifyCommand(txt);
 
             switch (cmd) {
@@ -228,13 +244,14 @@ int main() {
                         printf(", ");
                     printf("%s", commands[i]);
                 }
-                printf(".\n\n");
+                printf(".\n");
                 break;
 
             case EXAMINE:
                 printf("Examine what?> ");
                 scanf_s(" %[^\n]s", OBJ, 20);
-                ExamineReq = ExamineObject(OBJ);
+                LowerCaseConverter(OBJ);
+                ExamineReq = ExamineRequest(OBJ);
                 if (ExamineReq != -1) {
                     printf("%s\n", objects[ExamineReq].description);
                 }
@@ -248,7 +265,7 @@ int main() {
                     }
                 }
                 else
-                    printf("Theres nothing to examine\n");
+                    printf("You can't examine that!\n");
 
                 displayObject = -1;
                 break;
@@ -256,12 +273,13 @@ int main() {
             case TAKE:
                 printf("Take what?> ");
                 scanf_s(" %[^\n]s", OBJ, 20);
-                ExamineReq = ExamineObject(OBJ);
+                LowerCaseConverter(OBJ);
+                ExamineReq = ExamineRequest(OBJ);
                 if (ExamineReq == -1) {
                     printf("You can't pick that up here!\n");
                 }
                 else
-                itemManagement(ExamineReq);
+                TakeItem(ExamineReq);
                 displayObject = -1;
                 break;
 
@@ -269,6 +287,7 @@ int main() {
                 if (Items[0] == 1 || Items[1] == 1) {
                     printf("Drop what?> ");
                     scanf_s(" %[^\n]s", OBJ, 20);
+                    LowerCaseConverter(OBJ);
                     for (int i = 0; i < 2; i++) {
                         if (strcmp(OBJ, objects[i].name) == 0 && Items[i] == 1) {
                             Items[i] = 0;
@@ -278,7 +297,7 @@ int main() {
                     }
                 }
                 else {
-                    printf("You are not carrying anything!\n");
+                    printf("You are not carrying that!\n");
                 }
                 displayObject = -1;
                 break;

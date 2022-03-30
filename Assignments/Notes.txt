@@ -19,4 +19,22 @@ When examining items, if there are no items to examine in the area, examine the 
 
 Inventory command, check carry array to see if youre carrying anything and inform the user. insert a comma at the second iteration and if something was printed in the previous location
 
-Drop command, 
+Drop command, changes items location variable in the array
+
+When displaying 2 objects in a location, formatted it properly
+
+Added a lowercase function, to improve the user experience. commands/object names will no longer be case sensitive.
+-Added a lowercase converter function
+-When reading in the names for the objects, send the names to a lower case converter
+-Doesnt require the user to be case sensitive
+-Lowercase converter is also present when reading the input, makes comparing strings easy
+-Problem: When displaying the names, the are in lowercase
+-Possible Solution: Make a temp name array for object name and keep original
+
+Solution:
+2-D array to store object name strings
+Use strcpy to copy name of the object into the 2-d array
+Send the copy into the lower case converter
+Print proper name of object ("w/ capitals") whenever the name needs to be displayed on the screen.
+
+**Strcpy_s Parameters: (Destination, MaxSize of Source, Source)
