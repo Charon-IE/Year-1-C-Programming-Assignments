@@ -1,4 +1,8 @@
 
+//Name: Timonas Samoska
+//Student ID: 21326923
+//Date: 30/3/22 
+
 //Declaring Libraries
 #include <stdio.h>
 #include <string.h>
@@ -392,11 +396,15 @@ int main() {
                             //Inform the user it was successfully dropped
                             printf("Successfully dropped %s.\n", objects[i].name);
                         }
+                        //If the object you are trying to drop is already dropped, inform the user that it cant be dropped
+                        else
+                            printf("You cannot drop that!\n");
+                        break;
                     }
                 }
                 //If the requested item is not being carried or if theres an error, inform the user
                 else {
-                    printf("You are not carrying that!\n");
+                    printf("You are not carrying anything!\n");
                 }
                 //Set display object to -1 to avoid printing the objects again next iteration
                 displayObject = -1;
