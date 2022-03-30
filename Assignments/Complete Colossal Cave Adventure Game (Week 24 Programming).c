@@ -1,7 +1,4 @@
 
-//Name: Timonas Samoska
-//Student ID: 21326923
-//Date: 30/3/22 
 
 //Declaring Libraries
 #include <stdio.h>
