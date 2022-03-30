@@ -1,8 +1,4 @@
 
-//Name: Timonas Samoska
-//Student ID: 21326923
-//Date: 30/3/22 
-
 //Declaring Libraries
 #include <stdio.h>
 #include <string.h>
@@ -395,11 +391,12 @@ int main() {
                             objects[i].objectlocation = playerLocationNum;
                             //Inform the user it was successfully dropped
                             printf("Successfully dropped %s.\n", objects[i].name);
+                            break;
                         }
                         //If the object you are trying to drop is already dropped, inform the user that it cant be dropped
-                        else
+                        else if (i == 1) {
                             printf("You cannot drop that!\n");
-                        break;
+                        }
                     }
                 }
                 //If the requested item is not being carried or if theres an error, inform the user
